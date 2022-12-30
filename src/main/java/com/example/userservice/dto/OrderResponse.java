@@ -11,7 +11,7 @@ import java.util.Date;
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
-public class ResponseOrder {
+public class OrderResponse {
     private String productId;
 
     private Integer qty;

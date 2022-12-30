@@ -29,14 +29,11 @@ public class UserController {
 
     @GetMapping("/health")
     public String status() {
-        return String.format("it's Working in User Service on port %s",
-                env.getProperty("local.server.port"));
+        return String.format("it's Working in User Service on port %s", env.getProperty("local.server.port"));
     }
 
     @GetMapping("/welcome")
     public String welcome() {
-        log.info(greeting.getMessage());
-
         return env.getProperty("greeting.message");
     }
 
@@ -60,5 +57,4 @@ public class UserController {
 
         return ResponseEntity.status(HttpStatus.OK).body(repsonse);
     }
-
 }

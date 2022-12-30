@@ -22,7 +22,7 @@ public class UserResponse {
 
     private String userId;
 
-    private List<ResponseOrder> orders;
+    private List<OrderResponse> orders;
 
     public static UserResponse of(UserEntity user) {
         return new UserResponse(user.getEmail(), user.getName(), user.getUserId(), new ArrayList<>());

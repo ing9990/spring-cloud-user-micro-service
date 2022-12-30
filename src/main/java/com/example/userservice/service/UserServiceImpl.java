@@ -1,7 +1,5 @@
 package com.example.userservice.service;
 
-import com.example.userservice.dto.ResponseOrder;
-import com.example.userservice.dto.UserDto;
 import com.example.userservice.dto.UserRegisterDto;
 import com.example.userservice.dto.UserResponse;
 import com.example.userservice.entity.UserEntity;
@@ -12,7 +10,6 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
