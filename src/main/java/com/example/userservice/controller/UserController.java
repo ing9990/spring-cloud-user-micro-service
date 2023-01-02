@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.*;
 import javax.validation.Valid;
 
 @RestController
-@RequestMapping("/user-service")
+@RequestMapping
 @RequiredArgsConstructor
 @Slf4j
 public class UserController {
