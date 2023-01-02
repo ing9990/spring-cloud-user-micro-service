@@ -29,7 +29,7 @@ public class UserEntity {
     @Column(nullable = false)
     private String encryptedPassword;
 
-    public static UserEntity makeUser(String email, String name, String password){
+    public static UserEntity makeUser(String email, String name, String password) {
         return UserEntity.builder()
                 .email(email)
                 .name(name)
