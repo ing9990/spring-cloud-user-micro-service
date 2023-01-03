@@ -50,6 +50,14 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
+    public UserResponse getUserDetailsByEmail(String email) {
+        var user = userRepository.findUserEntityByEmail(email)
+                .orElseThrow(() -> new UsernameNotFoundException(email + " 유저를 찾을 수 없습니다."));
+
+        return UserResponse.of(user);
+    }
+
+    @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
         var user = userRepository.findUserEntityByEmail(username)
                 .orElseThrow(() -> new UsernameNotFoundException(username + " 유저를 찾을 수 없습니다."));

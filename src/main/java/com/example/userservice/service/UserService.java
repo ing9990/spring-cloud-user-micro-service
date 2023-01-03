@@ -15,4 +15,5 @@ public interface UserService extends UserDetailsService {
 
     List<UserResponse> getUserByAll();
 
+    UserResponse getUserDetailsByEmail(String username);
 }
