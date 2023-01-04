@@ -23,7 +23,7 @@ public class JwtServiceImpl implements JwtService {
 
     @Override
     public String buildJwtFromUser(String userId, User user) {
-        return Jwts.builder()
+        return "Bearer " + Jwts.builder()
                 .setSubject(userId)
                 .setExpiration(new Date(System.currentTimeMillis() + expirationTime))
                 .signWith(SignatureAlgorithm.HS256, secret)
@@ -32,7 +32,7 @@ public class JwtServiceImpl implements JwtService {
 
     @Override
     public String buildJwtFromUserDetails(String userId, UserResponse userDetails) {
-        return Jwts.builder()
+        return "Bearer " + Jwts.builder()
                 .setSubject(userId)
                 .setExpiration(new Date(System.currentTimeMillis() + expirationTime))
                 .signWith(SignatureAlgorithm.HS256, secret)
