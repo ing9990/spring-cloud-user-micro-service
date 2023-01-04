@@ -1,9 +1,10 @@
 package com.example.userservice.security.filter;
 
 import com.example.userservice.dto.LoginRequest;
+import com.example.userservice.security.jwt.JwtService;
 import com.example.userservice.service.UserService;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import lombok.RequiredArgsConstructor;
+import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.AuthenticationException;
@@ -17,17 +18,24 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.util.ArrayList;
 
-@RequiredArgsConstructor
 public class AuthenticationFilter extends UsernamePasswordAuthenticationFilter {
 
     private final UserService userService;
+    private final JwtService jwtService;
+
+    public AuthenticationFilter(UserService userService, JwtService jwtService, AuthenticationManager authenticationManager) {
+        this.userService = userService;
+        this.jwtService = jwtService;
+        super.setAuthenticationManager(authenticationManager);
+    }
 
     @Override
     public Authentication attemptAuthentication(HttpServletRequest request, HttpServletResponse response)
             throws AuthenticationException {
         // inputStream을 사용하지 않도록 변경 요함.
         try {
-            LoginRequest creds = new ObjectMapper().readValue(request.getInputStream(), LoginRequest.class);
+            LoginRequest creds = new ObjectMapper()
+                    .readValue(request.getInputStream(), LoginRequest.class);
 
             var upat = new UsernamePasswordAuthenticationToken(
                     creds.getEmail(),
@@ -46,11 +54,16 @@ public class AuthenticationFilter extends UsernamePasswordAuthenticationFilter {
                                             FilterChain chain, Authentication authResult)
             throws IOException, ServletException {
 
-        var username = ((User) authResult.getPrincipal()).getUsername();
-        var userDetails = userService.getUserDetailsByEmail(username);
+        var user = ((User) authResult.getPrincipal());
+        var userDetails = userService.getUserDetailsByEmail(user.getUsername());
+        var userId = userDetails.getUserId();
 
+        String token = jwtService.buildJwtFromUserDetails(userId, userDetails);
 
-        super.successfulAuthentication(request, response, chain, authResult);
+        response.addHeader("token", token);
+        response.addHeader("userId", userDetails.getUserId());
+
+        System.out.println("Login Success!!" + token);
     }
 }
 
