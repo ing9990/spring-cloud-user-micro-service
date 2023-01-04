@@ -11,6 +11,7 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -58,6 +59,7 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
+    @Transactional
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
         var user = userRepository.findUserEntityByEmail(username)
                 .orElseThrow(() -> new UsernameNotFoundException(username + " 유저를 찾을 수 없습니다."));
