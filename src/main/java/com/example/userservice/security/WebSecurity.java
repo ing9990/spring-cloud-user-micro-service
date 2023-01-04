@@ -1,6 +1,7 @@
 package com.example.userservice.security;
 
 import com.example.userservice.security.filter.AuthenticationFilter;
+import com.example.userservice.security.jwt.JwtService;
 import com.example.userservice.service.UserService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Configuration;
@@ -17,6 +18,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 public class WebSecurity extends WebSecurityConfigurerAdapter {
 
     private final UserService userService;
+    private final JwtService jwtService;
     private final PasswordEncoder passwordEncoder;
 
     @Override
@@ -31,7 +33,7 @@ public class WebSecurity extends WebSecurityConfigurerAdapter {
     }
 
     private AuthenticationFilter getAuthenticationFilter() throws Exception {
-        return new AuthenticationFilter(userService);
+        return new AuthenticationFilter(userService, jwtService, authenticationManager());
     }
 
 
@@ -40,6 +42,5 @@ public class WebSecurity extends WebSecurityConfigurerAdapter {
         auth
                 .userDetailsService(userService)
                 .passwordEncoder(passwordEncoder);
-
     }
 }
