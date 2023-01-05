@@ -4,6 +4,7 @@ import com.example.userservice.dto.LoginRequest;
 import com.example.userservice.security.jwt.JwtService;
 import com.example.userservice.service.UserService;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import org.springframework.http.HttpHeaders;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
@@ -60,7 +61,7 @@ public class AuthenticationFilter extends UsernamePasswordAuthenticationFilter {
 
         String token = jwtService.buildJwtFromUserDetails(userId, userDetails);
 
-        response.addHeader("token", token);
+        response.addHeader(HttpHeaders.AUTHORIZATION, token);
         response.addHeader("userId", userDetails.getUserId());
     }
 }

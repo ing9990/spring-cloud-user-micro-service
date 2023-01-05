@@ -8,7 +8,6 @@ import org.springframework.stereotype.Component;
 @Component
 public interface JwtService {
 
-    String buildJwtFromUser(String userId,User user);
     String buildJwtFromUserDetails(String userId, UserResponse userDetails);
 
 }
