@@ -10,6 +10,10 @@ spring:
     username: root
     password:
 
+token:
+  expiration_time: 12134
+  secret: asd
+
   jpa:
     hibernate:
       ddl-auto: update
@@ -30,6 +34,8 @@ eureka:
 greeting:
   message: Welcome to the Simple E-commerce.
 
-token:
-  expiration_time: 86400000
-  secret: aGVsbG93b3JsZA==
+management:
+  endpoint:
+    web:
+      exposure:
+        include: refresh, health, bean
