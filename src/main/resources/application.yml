@@ -35,7 +35,7 @@ greeting:
   message: Welcome to the Simple E-commerce.
 
 management:
-  endpoint:
+  endpoints:
     web:
       exposure:
-        include: refresh, health, bean
+        include: refresh, health, beans
