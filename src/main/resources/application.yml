@@ -10,10 +10,6 @@ spring:
     username: root
     password:
 
-token:
-  expiration_time: 12134
-  secret: asd
-
   jpa:
     hibernate:
       ddl-auto: update
