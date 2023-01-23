@@ -5,6 +5,12 @@ spring:
   application:
     name: user-service
 
+  rabbitmq:
+    host: 127.0.0.1
+    port: 5672
+    username: quest
+    password: quest
+
   datasource:
     url: jdbc:mysql://localhost:3306/ecommerce
     username: root
