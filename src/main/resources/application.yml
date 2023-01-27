@@ -11,10 +11,10 @@ spring:
     username: guest
     password: guest
 
-  datasource:
-    url: jdbc:mysql://localhost:3306/ecommerce
-    username: root
-    password:
+#  datasource:
+#    url: jdbc:mysql://localhost:3306/ecommerce
+#    username: root
+#    password:
 
   jpa:
     hibernate:
